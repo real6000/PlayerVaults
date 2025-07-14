@@ -69,7 +69,7 @@ public class VaultCommand implements CommandExecutor {
             }
         }
 
-        int maxVaults = plugin.getConfig().getInt("vault.max-vaults", 1);
+        int maxVaults = plugin.getMaxVaults(player);
         if (vaultNumber < 1 || vaultNumber > maxVaults) {
             player.sendMessage(ChatUtil.color(plugin.getConfig().getString("vault.messages.too-many", "&cYou do not have access to that many vaults.")));
             return true;

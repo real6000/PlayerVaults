@@ -4,8 +4,6 @@ import org.brokeski.playerVaults.PlayerVaults;
 import org.brokeski.playerVaults.utils.ChatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -29,9 +27,10 @@ public class VaultsCommand implements org.bukkit.command.CommandExecutor{
 
         if(!player.hasPermission("playervaults.use")){
             player.sendMessage(ChatUtil.color("&cYou don't have permissions to use vaults."));
+            return true;
         }
 
-        int maxVaults = plugin.getConfig().getInt("vault.max-vaults", 1);
+        int maxVaults = plugin.getMaxVaults(player);
         Inventory gui = Bukkit.createInventory(null, 27, "Your Vaults");
 
         for(int i=1; i<=maxVaults; i++){
