@@ -1,5 +1,7 @@
 package org.brokeski.playerVaults;
 
+import org.brokeski.playerVaults.commands.VaultCommand;
+import org.brokeski.playerVaults.listeners.InventoryListener;
 import org.brokeski.playerVaults.storage.VaultManager;
 import org.bukkit.plugin.java.JavaPlugin;
 

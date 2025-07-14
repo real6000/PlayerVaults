@@ -15,35 +15,35 @@ public class VaultDataHandler {
     private final PlayerVaults plugin;
     private final File vaultsFolder;
 
-    public VaultDataHandler(PlayerVaults plugin, File vaultsFolder) {
+    public VaultDataHandler(PlayerVaults plugin) {
         this.plugin = plugin;
         this.vaultsFolder = new File(plugin.getDataFolder(), "vaults");
 
-        if(!vaultsFolder.exists()){
+        if (!vaultsFolder.exists()) {
             vaultsFolder.mkdirs();
         }
     }
-
-    public Inventory loadVault(UUID uuid){
-        File file = new File(vaultsFolder, uuid.toString() + ".yml");
+    public Inventory loadVault(UUID uuid, int number) {
+        File file = new File(vaultsFolder, uuid.toString() + "_vault" + number + ".yml");
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        int rows = plugin.getConfig().getInt("vaults.rows", 6);
-        Inventory inv = Bukkit.createInventory(null, rows * 9, "Your Vault");
+        int rows = plugin.getConfig().getInt("vault.rows", 6);
+        Inventory inv = Bukkit.createInventory(null, rows * 9, "Vault #" + number);
 
-        if(file.exists()){
-            for(int i = 0; i < inv.getSize(); i++){
-                ItemStack item = config.getItemStack("slot."+i);
-                if(item!=null){
+        if (file.exists()) {
+            for (int i = 0; i < inv.getSize(); i++) {
+                ItemStack item = config.getItemStack("slot." + i);
+                if (item != null) {
                     inv.setItem(i, item);
                 }
             }
         }
+
         return inv;
     }
 
-    public void saveVault(UUID uuid, Inventory inv){
-        File file = new File(vaultsFolder, uuid.toString() +".yml");
+    public void saveVault(UUID uuid, Inventory inv, int number) {
+        File file = new File(vaultsFolder, uuid.toString() + "_vault" + number + ".yml");
         YamlConfiguration config = new YamlConfiguration();
 
         for (int i = 0; i < inv.getSize(); i++) {
@@ -56,7 +56,7 @@ public class VaultDataHandler {
         try {
             config.save(file);
         } catch (IOException e) {
-            plugin.getLogger().warning("Failed to save vault for " + uuid);
+            plugin.getLogger().warning("Failed to save vault #" + number + " for " + uuid);
             e.printStackTrace();
         }
     }

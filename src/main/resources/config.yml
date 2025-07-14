@@ -1,7 +1,9 @@
 vault:
-  rows: 6 # Number of rows (6 * 9 = 54 slots)
-  save-format: yaml # or json, or sql (future)
+  rows: 6
+  max-vaults: 3
+  save-format: yaml
   auto-save: true
   messages:
-    open: "&aOpening your vault..."
-    saved: "&7Vault saved successfully."
+    open: "&aOpening vault #%number%..."
+    invalid-number: "&cInvalid vault number."
+    too-many: "&cYou do not have access to that many vaults."

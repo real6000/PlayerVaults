@@ -14,24 +14,34 @@ public class VaultManager {
     private final VaultDataHandler dataHandler;
 
 
-    public VaultManager(PlayerVaults plugin, VaultDataHandler dataHandler) {
+    public VaultManager(PlayerVaults plugin) {
         this.plugin = plugin;
-        this.dataHandler = new VaultDataHandler(plugin);
+        this.dataHandler = new VaultDataHandler(plugin); // single argument here
     }
 
-    public void openVault(Player player){
+    public void openVault(Player player, int number) {
         UUID uuid = player.getUniqueId();
-        Inventory vault = dataHandler.loadVault(uuid);
+        Inventory vault = dataHandler.loadVault(uuid, number);
 
         openVaults.put(uuid, vault);
         player.openInventory(vault);
     }
 
-    public void handleClose(Player player, Inventory inv){
+    public void handleClose(Player player, Inventory inv) {
         UUID uuid = player.getUniqueId();
-        if(openVaults.containsKey(uuid)){
-            dataHandler.saveVault(uuid, inv);
+        if (openVaults.containsKey(uuid)) {
+            int vaultNumber = getVaultNumberFromTitle(inv.getClass().getName());
+            dataHandler.saveVault(uuid, inv, vaultNumber);
             openVaults.remove(uuid);
         }
+    }
+
+    private int getVaultNumberFromTitle(String title) {
+        try {
+            if (title.toLowerCase().contains("vault #")) {
+                return Integer.parseInt(title.replaceAll("[^0-9]", ""));
+            }
+        } catch (NumberFormatException ignored) {}
+        return 1; // fallback
     }
 }
