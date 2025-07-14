@@ -1,6 +1,7 @@
 package org.brokeski.playerVaults.storage;
 
 import org.brokeski.playerVaults.PlayerVaults;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -17,6 +18,13 @@ public class VaultManager {
     public VaultManager(PlayerVaults plugin) {
         this.plugin = plugin;
         this.dataHandler = new VaultDataHandler(plugin); // single argument here
+    }
+
+    public void openOtherVault(Player viewer, UUID targetUUID, String targetName, int number) {
+        Inventory inv = dataHandler.loadVault(targetUUID, number);
+        inv = Bukkit.createInventory(viewer, inv.getSize(), targetName + "'s Vault #" + number);
+        inv.setContents(dataHandler.loadVault(targetUUID, number).getContents());
+        viewer.openInventory(inv);
     }
 
     public void openVault(Player player, int number) {
