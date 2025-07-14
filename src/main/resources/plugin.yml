@@ -9,6 +9,10 @@ commands:
     description: Open your player vault
     usage: /vault
     permission: playervaults.use
+  vaults:
+    description: Open vault selection GUI
+    usage: /vaults
+    permission: playervaults.use
 permissions:
   playervaults.use:
     default: true
