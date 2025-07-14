@@ -19,7 +19,7 @@ A powerful Minecraft **multi-vault plugin** that lets players create multiple pe
 
 ## 📦 Installation
 
-1. Download the latest `PlayerVaults.jar` from the [Releases](https://github.com/yourusername/PlayerVaults/releases) page.  
+1. Download the latest `PlayerVaults.jar` from the [Releases](https://github.com/real6000/PlayerVaults/releases) page.  
 2. Drop it into your server’s `plugins` folder.  
 3. Start your server to generate the config files.  
 4. Configure `config.yml` to your liking.  
