@@ -4,3 +4,13 @@ main: org.brokeski.playerVaults.PlayerVaults
 api-version: '1.21'
 authors: [ Real6000 ]
 description: Basic player vault for lego game
+commands:
+  vault:
+    description: Open your player vault
+    usage: /vault
+    permission: playervaults.use
+permissions:
+  playervaults.use:
+    default: true
+  playervaults.admin:
+    default: op
