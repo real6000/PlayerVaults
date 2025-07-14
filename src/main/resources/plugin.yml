@@ -1,0 +1,6 @@
+name: PlayerVaults
+version: '1.0-SNAPSHOT'
+main: org.brokeski.playerVaults.PlayerVaults
+api-version: '1.21'
+authors: [ Real6000 ]
+description: Basic player vault for lego game
